@@ -16,7 +16,7 @@ int check_cycle(listint_t *list)
 		{
 			head = head->next->next;
 			tail = tail->next;
-			if (tail == hare)
+			if (tail == head)
 			{
 				tail = list;
 				while (tail != head)
