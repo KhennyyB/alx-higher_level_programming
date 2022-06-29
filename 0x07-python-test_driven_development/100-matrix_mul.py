@@ -16,11 +16,11 @@ def matrix_mul(m_a, m_b):
     elif type(m_b) is not list:
         raise TypeError('m_b must be a list')
 
-    for l in m_a:
-        if type(l) is not list:
+    for x in m_a:
+        if type(x) is not list:
             raise TypeError('m_a must be a list of lists')
-    for l in m_b:
-        if type(l) is not list:
+    for x in m_b:
+        if type(x) is not list:
             raise TypeError('m_b must be a list of lists')
 
     if len(m_a) == 0:
@@ -28,37 +28,37 @@ def matrix_mul(m_a, m_b):
     if len(m_b) == 0:
         raise ValueError("m_b can't be empty")
 
-    for l in m_a:
-        if len(l) == 0:
+    for x in m_a:
+        if len(x) == 0:
             raise ValueError("m_a can't be empty")
-    for l in m_b:
-        if len(l) == 0:
+    for x in m_b:
+        if len(x) == 0:
             raise ValueError("m_b can't be empty")
 
-    for l in m_a:
-        for e in l:
+    for x in m_a:
+        for e in x:
             if type(e) is not int and type(e) is not float:
                 raise TypeError(
                     'm_a should contain only integers or floats'
                     )
 
-    for l in m_b:
-        for e in l:
+    for x in m_b:
+        for e in x:
             if type(e) is not int and type(e) is not float:
                 raise TypeError(
                     'm_b should contain only integers or floats'
                     )
 
     size = len(m_a[0])
-    for l in m_a:
-        if len(l) != size:
+    for x in m_a:
+        if len(x) != size:
             raise TypeError(
                 'each row of m_a must be of the same size'
                 )
 
     size = len(m_b[0])
-    for l in m_b:
-        if len(l) != size:
+    for x in m_b:
+        if len(x) != size:
             raise TypeError(
                 'each row of m_b must be of the same size'
                 )
@@ -69,7 +69,7 @@ def matrix_mul(m_a, m_b):
     new_matrix = list()
     c_size = len(m_b[1])
 
-    for l in m_a:
+    for x in m_a:
         ls = []
         i = 0   # for b
         n = 0   # for a
