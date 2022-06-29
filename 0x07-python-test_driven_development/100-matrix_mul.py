@@ -77,7 +77,7 @@ def matrix_mul(m_a, m_b):
         for c in range(c_size):
             ls.append(0)
             for r in m_b:
-                ls[j] += r[i] * l[n]
+                ls[j] += r[i] * x[n]
                 n += 1
             i += 1
             n = 0
