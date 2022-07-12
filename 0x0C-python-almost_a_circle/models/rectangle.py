@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-'''rectangle Module / task 2
-'''
+"""Contains classes for working with Polygons.
+"""
 from .base import Base
 
 
 class Rectangle(Base):
-    '''Rectangle Class that inherits
-    from Base Class
-    '''
+    """Represents a polygon with 4 perpendicular and
+    two pairs of equal sides.
+    """
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initializes a new rectangle object.
@@ -26,62 +26,62 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        '''retrieves the __width attribute value
-        '''
+        """Gets or sets the width of this rectangle.
+        """
         return self.__width
+
+    @property
+    def height(self):
+        """Gets or sets the height of this rectangle.
+        """
+        return self.__height
+
+    @property
+    def x(self):
+        """Gets or sets the horizontal position of this rectangle.
+        """
+        return self.__x
+
+    @property
+    def y(self):
+        """Gets or sets the vertical position of this rectangle.
+        """
+        return self.__y
 
     @width.setter
     def width(self, value):
-        '''sets the new value to the __width attribute
-        '''
+        """Gets or sets the width of this rectangle.
+        """
         if type(value) is not int:
             raise TypeError('width must be an integer')
         if value <= 0:
             raise ValueError('width must be > 0')
         self.__width = value
 
-    @property
-    def height(self):
-        '''retrieves the __height attribute value
-        '''
-        return self.__height
-
     @height.setter
     def height(self, value):
-        '''sets the new value to the __height attribute
-        '''
+        """Gets or sets the height of this rectangle.
+        """
         if type(value) is not int:
             raise TypeError('height must be an integer')
         if value <= 0:
             raise ValueError('height must be > 0')
         self.__height = value
 
-    @property
-    def x(self):
-        '''retrieves the __x attribute value
-        '''
-        return self.__x
-
     @x.setter
     def x(self, value):
-        '''sets the new value to the __x attribute
-        '''
+        """Gets or sets the horizontal position of this rectangle.
+        """
         if type(value) is not int:
             raise TypeError('x must be an integer')
         if value < 0:
             raise ValueError('x must be >= 0')
         self.__x = value
 
-    @property
-    def y(self):
-        '''retrieves the __y attribute value
-        '''
-        return self.__y
-
     @y.setter
     def y(self, value):
-        '''sets the new value to the __y attribute
-        '''
+        """Gets or sets the vertical position of this rectangle.
+        """
         if type(value) is not int:
             raise TypeError('y must be an integer')
         if value < 0:
@@ -89,48 +89,61 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
-        '''calculates the rectangle area
+        """Computes the area of this rectangle.
         Returns:
-            the calculation result "the area"
-        '''
+            int: The area of this rectangle.
+        """
         return self.width * self.height
 
     def display(self):
-        '''prints the rectangle instance with the # character'''
-        buffer = [' ' * self.x + '#' * self.width for h in range(self.height)]
-        print('\n' * self.y + '\n'.join(buffer))
-
-    def update(self, *args, **kwargs):
-        '''Updates the instance attributes from
-        the arguments passed in a strict order
-        or from the kwargs
-        '''
-        i = 0
-        attributes = ['id', 'width', 'height', 'x', 'y']
-        if len(args) > 0:
-            for attr in attributes:
-                if i > len(args) - 1:
-                    break
-                setattr(self, attr, args[i])
-                i += 1
-        else:
-            for key, value in kwargs.items():
-                if key not in attributes:
-                    continue
-                setattr(self, key, value)
-
-    def to_dictionary(self):
-        '''returns the dictionary representation of a Rectangle instance'''
-        return {
-                'id': self.id,
-                'x': self.x,
-                'y': self.y,
-                'width': self.width,
-                'height': self.height
-                }
+        """Prints a text representation of this rectangle.
+        """
+        h_off = ' ' * self.x
+        h_val = '#' * self.width
+        print('\n' * self.y, end='')
+        print('{:s}{:s}\n'.format(h_off, h_val) * self.height, end='')
 
     def __str__(self):
-        '''returns the string representation fo the instance'''
-        fh = '[Rectangle] ({}) {:d}/{:d}'.format(self.id, self.x, self.y)
-        sh = ' - {:d}/{:d}'.format(self.width, self.height)
-        return fh + sh
+        """Creates a string representation of this polygon.
+        Returns:
+            str: A string representation of this polygon.
+        """
+        parts = (
+            self.id,
+            self.x,
+            self.y,
+            self.width,
+            self.height
+        )
+        res = '[Rectangle] ({}) {:d}/{:d} - {:d}/{:d}'.format(
+            parts[0], parts[1], parts[2], parts[3], parts[4]
+        )
+        return res
+
+    def update(self, *args, **kwargs):
+        """Updates the attributes of this polygon.
+        Args:
+            args (tuple): A tuple of non-keyword arguments.
+            kwargs (dict): A dictionary of keyword arguments.
+        """
+        attrs = ('id', 'width', 'height', 'x', 'y')
+        for key, val in zip(attrs, args):
+            setattr(self, key, val)
+        if (type(args) is None or len(args) == 0) and (type(kwargs) is dict):
+            for key, val in kwargs.items():
+                if key in attrs:
+                    setattr(self, key, val)
+
+    def to_dictionary(self):
+        """Creates a dictionary representation of this polygon.
+        Returns:
+            dict: A dictionary representation of this polygon.
+        """
+        res = {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
+        return res
