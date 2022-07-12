@@ -1,69 +1,76 @@
 #!/usr/bin/python3
-'''square Module / task 10'''
-
-
+"""Contains classes for working with Polygons.
+"""
 from .rectangle import Rectangle
 
 
 class Square(Rectangle):
-    '''Square class'''
-    def __init__(self, size, x=0, y=0, id=None):
-        '''Initialization of the instance'''
-        super().__init__(size, size, x, y, id)
+    """Represents a polygon with 4 perpendicular and
+    equal sides.
+    """
 
-    # ********** Getters and Setters Section ***********
+    def __init__(self, size, x=0, y=0, id=None):
+        """Initializes a new square object.
+        Args:
+            size (int): The width and height of this square.
+            x (int): The horizontal position of this square.
+            y (int): The vertical position of this square.
+            id (int): The id of this square.
+        """
+        super().__init__(size, size, x, y, id)
 
     @property
     def size(self):
-        '''retrieves the size => width attribute'''
+        """Gets or sets the size of this square.
+        """
         return self.width
 
     @size.setter
     def size(self, value):
-        '''sets the new vale to the size attribute => width and height'''
+        """Gets or sets the size of this square.
+        """
         self.width = value
         self.height = value
 
-    # ********** End of Getters and Setters Section ****
-
-    # ********** Instance Methods Section **************
+    def __str__(self):
+        """Creates a string representation of this polygon.
+        Returns:
+            str: A string representation of this polygon.
+        """
+        parts = (
+            self.id,
+            self.x,
+            self.y,
+            self.width
+        )
+        res = '[Square] ({}) {:d}/{:d} - {:d}'.format(
+            parts[0], parts[1], parts[2], parts[3]
+        )
+        return res
 
     def update(self, *args, **kwargs):
-        '''Updates the instance attributes from
-        the arguments passed in a strict order
-        or from the kwargs
-        '''
-        i = 0
-        attributes = ['id', 'size', 'x', 'y']
-        if len(args) > 0:
-            for attr in attributes:
-                if i > len(args) - 1:
-                    break
-                setattr(self, attr, args[i])
-                i += 1
-        else:
-            for key, value in kwargs.items():
-                if key not in attributes:
-                    continue
-                setattr(self, key, value)
+        """Updates the attributes of this polygon.
+        Args:
+            args (tuple): A tuple of non-keyword arguments.
+            kwargs (dict): A dictionary of keyword arguments.
+        """
+        attrs = ('id', 'size', 'x', 'y')
+        for key, val in zip(attrs, args):
+            setattr(self, key, val)
+        if (type(args) is None or len(args) == 0) and (type(kwargs) is dict):
+            for key, val in kwargs.items():
+                if key in attrs:
+                    setattr(self, key, val)
 
     def to_dictionary(self):
-        '''returns the dictionary representation of the Square instance'''
-        return {
-                'id': self.id,
-                'size': self.size,
-                'x': self.x,
-                'y': self.y
-                }
-
-    # ********** End of Instace Methods Section ********
-
-    # ********** Magic Methods Section *****************
-
-    def __str__(self):
-        '''returns the string representation of the instance'''
-        fh = '[Square] ({}) {:d}/{:d}'.format(self.id, self.x, self.y)
-        sh = ' - {:d}'.format(self.width)
-        return fh + sh
-
-    # ********** End of Magic Methods Section **********
+        """Creates a dictionary representation of this polygon.
+        Returns:
+            dict: A dictionary representation of this polygon.
+        """
+        res = {
+            'id': self.id,
+            'size': self.size,
+            'x': self.x,
+            'y': self.y
+        }
+        return res
