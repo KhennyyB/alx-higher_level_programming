@@ -1,5 +1,5 @@
 -- lists all shows, and all genres linked to that show, from the database hbtn_0d_tvshows.
-SELECT tvs.title, genre
+SELECT tvs.title, g.name AS genre
 FROM tv_shows tvs
 LEFT JOIN tv_show_genres tvg
 ON tvg.show_id = tvs.id
