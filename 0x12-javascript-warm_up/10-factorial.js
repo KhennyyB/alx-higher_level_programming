@@ -1,11 +1,11 @@
 #!/usr/bin/node
-const firstArg = parseInt(process.argv[2]);
-const secondArg = parseInt(process.argv[3]);
+const num = parseInt(process.argv[2]);
 
-function add (a, b) {
-  if (a && b) {
-    return (a + b);
+function factorial (n) {
+  if (!n) {
+    return (1);
   }
-  return NaN;
+  return (n * factorial(n - 1));
 }
-console.log(add(firstArg, secondArg));
+
+console.log(factorial(num));
