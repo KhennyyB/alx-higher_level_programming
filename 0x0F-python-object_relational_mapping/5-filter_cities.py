@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''script for task 5'''
+'''script to list all cities passed as argument'''
 
 import MySQLdb
 import sys
