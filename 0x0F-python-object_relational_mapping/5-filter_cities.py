@@ -18,10 +18,10 @@ def list_by_state():
                          db=db_name, port=port)
     cur = db.cursor()
     cur.execute('SELECT cities.name FROM cities' +
-            ' INNER JOIN states ON cities.state_id = states.id' +
-            ' WHERE CAST(states.name AS BINARY) = %s' +
-            ' ORDER BY cities.id ASC;',
-            [state_name])
+                ' INNER JOIN states ON cities.state_id = states.id' +
+                ' WHERE CAST(states.name AS BINARY) = %s' +
+                ' ORDER BY cities.id ASC;',
+                [state_name])
     result = cur.fetchall()
     cur.close()
     db.close()
