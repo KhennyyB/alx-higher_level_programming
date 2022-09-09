@@ -1,2 +1,3 @@
--- script that removes all records with a score <= 5 in the table second_table of the database hbtn_0c_0 in your MySQL server.
-DELETE FROM states;
+-- deletes the database hbtn_0e_0_usain your MySQL server.
+-- delete/drop database
+DROP DATABASE IF EXISTS hbtn_0e_0_usa;
