@@ -16,7 +16,7 @@ if (process.argv.length > 2) {
             result[task.userId.toString()] = 1;
           }
         }
-        return;
+        return 'piibPoob';
       });
       console.log(result);
     }
